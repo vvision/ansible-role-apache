@@ -1,0 +1,37 @@
+---
+- name: Generate strong DH parameters (might take time)
+  openssl_dhparam:
+    path: /etc/ssl/dhparams.pem
+    size: 2048
+    force: True
+
+- name: Deploy ssl-params.conf
+  copy:
+    mode: 0751
+    owner: www-data
+    group: www-data
+    src: "etc/apache2/conf-available/ssl-params.conf"
+    dest: "/etc/apache2/conf-available/ssl-params.conf"
+
+- name: Enable ssl-params.conf
+  command: a2enconf ssl-params
+  become: true
+  notify: reload apache2
+
+- name: Deploy security-headers.conf
+  copy:
+    mode: 0751
+    owner: www-data
+    group: www-data
+    src: "etc/apache2/conf-available/security-headers.conf"
+    dest: "/etc/apache2/conf-available/security-headers.conf"
+
+- name: Enable security-headers.conf
+  command: a2enconf security-headers
+  become: true
+  notify: reload apache2
+
+- name: Disable default
+  command: a2dissite 000-default.conf
+  become: true
+  notify: reload apache2

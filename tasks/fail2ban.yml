@@ -1,0 +1,7 @@
+---
+# apache
+- name: FAIL2BAN | Activate apache jails
+  copy:
+    src: etc/fail2ban/jail.d/apache.conf
+    dest: /etc/fail2ban/jail.d/apache.conf
+  notify: restart fail2ban
