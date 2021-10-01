@@ -1,0 +1,17 @@
+---
+- name: Install packages
+  apt:
+    name: [
+      'apache2',
+      'libapache2-mod-wsgi',
+      'openssl',
+    ]
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Enables the Apache2 module {{ item }}
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items: "{{ apache_activate_modules }}"

@@ -3,7 +3,7 @@
   openssl_dhparam:
     path: /etc/ssl/dhparams.pem
     size: 2048
-    force: True
+    # force: True
 
 - name: Deploy ssl-params.conf
   copy:
@@ -16,6 +16,7 @@
 - name: Enable ssl-params.conf
   command: a2enconf ssl-params
   become: true
+  changed_when: false
   notify: reload apache2
 
 - name: Deploy security-headers.conf
@@ -29,9 +30,12 @@
 - name: Enable security-headers.conf
   command: a2enconf security-headers
   become: true
+  changed_when: false
   notify: reload apache2
 
 - name: Disable default
   command: a2dissite 000-default.conf
   become: true
+  when: apache_disable_default_site | bool
+  changed_when: false
   notify: reload apache2

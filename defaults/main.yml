@@ -1,0 +1,8 @@
+---
+apache_disable_default_site: true
+apache_activate_modules: [
+  'headers',
+  'http2',
+  'rewrite',
+  'ssl'
+]

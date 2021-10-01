@@ -1,9 +1,6 @@
 ---
-- name: INCLUDE | Install package
-  import_tasks: packages.yml
+- name: INCLUDE | Install packages
+  import_tasks: install.yml
 
 - name: INCLUDE | Configure apache2 (DH params & SSL)
-  import_tasks: conf.yml
-
-- name: INCLUDE | Configure fail2ban jails for apache
-  import_tasks: fail2ban.yml
+  import_tasks: configure.yml

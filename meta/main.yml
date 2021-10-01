@@ -1,30 +1,15 @@
 ---
-dependencies:
-  - src: git@github.com:vvision/ansible-role-fail2ban.git
-    scm: git
-  - role: geerlingguy.php
-    vars:
-      php_packages_extra: [
-          'libapache2-mod-php{{ php_version }}',
-          'php{{ php_version }}',
-          'php{{ php_version }}-bcmath',
-          'php{{ php_version }}-gmp',
-          'php{{ php_version }}-intl',
-          'php{{ php_version }}-mysql',
-          'php{{ php_version }}-readline',
-          'php{{ php_version }}-tidy',
-          'php{{ php_version }}-zip'
-      ]
+dependencies: []
 
 galaxy_info:
+  role_name: apache
   author: vvision
-  description: Install and configure apache.
-  # company: ""
-  # license: ""
-  min_ansible_version: 2.4
+  description: apache
+  license: "MIT"
+  min_ansible_version: 2.6
   platforms:
     - name: Debian
       versions:
-        - all
+        - buster
   galaxy_tags:
-    - system
+    - apache
